@@ -53,7 +53,9 @@ console.log("from redux", ToDoList);
                 }
                 <Typography style={{ textAlign: 'left', marginTop: 15, marginBottom: 5 }}>Archive List</Typography>
                 {
-                    ToDoList.filter((td) => { return td.IsCompleted === true  }).map((item, idx) => {
+                    ToDoList.filter((td) => { return td.IsCompleted === true })
+                        .sort((a, b) => { return b.CreatedDate - a.CreatedDate })
+                        .map((item, idx) => {
                         return <TodoItem props={item} onItemChecked={(e) => onItemChecked(e, item)} />
                     })
                 }
