@@ -4,7 +4,9 @@ import { useDispatch } from 'react-redux';
 import { addTodo } from '../../redux/reducers/coreSlice';
 
 const CreateToDoFrom = ({ props, onSubmit }) => {
-    const [form, setForm] = useState(null);
+    const [form, setForm] = useState({});
+    const [errorTitle, setErrorTitle] = useState(false);
+    const [errorText, setErrorText] = useState(false);
 
     const handleForm = (event) => {
         const { id, value } = event.target;
@@ -15,11 +17,26 @@ const CreateToDoFrom = ({ props, onSubmit }) => {
 const dispatch = useDispatch()
 
 
+
+
     const onSubmitForm = (e) => {
-        e.preventDefault();
-        console.log(form);
-        dispatch(addTodo(form));
-        // onSubmit(form);
+        console.log(form)
+        if (form.Title && form.Title !== '' && form.Text && form.Text !== '') {
+            console.log('form is valid');
+            dispatch(addTodo(form));
+            setForm({});
+            setErrorTitle(false);
+            setErrorText(false);
+
+
+        }
+        if (typeof form.Title === 'undefined' || form.Title === '') {
+            console.log("...", form.Title)
+            setErrorTitle(true);
+        }
+        if (typeof form.Text === 'undefined' || form.Text === '') {
+            setErrorText(true);
+        }
 
     }
     return (
@@ -35,11 +52,13 @@ const dispatch = useDispatch()
             noValidate
             autoComplete="off"
         >
+
             {
                 Object.keys(props).map((item) => {
                     return <div style={{ marginTop: 10 }}>
-                        <TextField
 
+                        <TextField
+                            error={(item === 'Title' && errorTitle ? true : false) || (item === 'Text' && errorText ? true : false)}
                             id={item}
                             label={`Type ${item}`}
                             placeholder={item}
@@ -49,6 +68,7 @@ const dispatch = useDispatch()
                     </div>
                 })
             }
+
             <Button onClick={onSubmitForm} variant="outlined" style={{ marginTop: 15, marginBottom: 15 }}>Add</Button>
         </Box>
     )

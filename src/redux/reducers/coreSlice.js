@@ -7,8 +7,8 @@ export const coreSlice = createSlice({
       ID: -1,
       Title: '',
       Text: '',
-      IsDeleted: false,
-      CreatedDate: null
+      // IsDeleted: false,
+      // CreatedDate: null
     },
     ToDoList: [
       {
