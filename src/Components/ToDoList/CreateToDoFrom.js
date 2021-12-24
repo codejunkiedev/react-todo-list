@@ -24,7 +24,7 @@ const dispatch = useDispatch()
         if (form.Title && form.Title !== '' && form.Text && form.Text !== '') {
             console.log('form is valid');
             dispatch(addTodo(form));
-            setForm({});
+            // setForm({});
             setErrorTitle(false);
             setErrorText(false);
 
