@@ -21,6 +21,8 @@ console.log("from redux", ToDoList);
         dispatch(setToDoList(newTodo));
     }
 
+
+
     return (
         <Grid container style={{ padding: 25 }}>
             <Grid xs={4} style={{ paddingTop: 25, textAlign: 'left' }}>
@@ -43,7 +45,9 @@ console.log("from redux", ToDoList);
             <Grid xs={8} style={{ margin: '0 auto', paddingTop: 25 }}>
                 <Typography style={{ textAlign: 'left', marginTop: 15, marginBottom: 5 }}>To Do List</Typography>
                 {
-                    ToDoList.filter((td) => { return (td.IsDeleted === false || td.IsDeleted ==="false") && td.IsCompleted === false }).map((item, idx) => {
+                    ToDoList.filter((td) => { return (td.IsDeleted === false || td.IsDeleted === "false") && td.IsCompleted === false })
+                        .sort((a, b) => { return b.CreatedDate - a.CreatedDate })
+                        .map((item, idx) => {
                         return <TodoItem props={item} onItemChecked={(e) => onItemChecked(e, item)} />
                     })
                 }
