@@ -27,7 +27,10 @@ const dispatch = useDispatch()
             className='form-container'
             component="form"
             sx={{
-                '& .MuiTextField-root': { m: 1, width: '25ch' },
+                width: '60%',
+                height: '60%',
+                paddingTop: 20,
+
             }}
             noValidate
             autoComplete="off"
@@ -36,6 +39,7 @@ const dispatch = useDispatch()
                 Object.keys(props).map((item) => {
                     return <div style={{ marginTop: 10 }}>
                         <TextField
+
                             id={item}
                             label={`Type ${item}`}
                             placeholder={item}
@@ -45,7 +49,7 @@ const dispatch = useDispatch()
                     </div>
                 })
             }
-            <Button onClick={onSubmitForm} variant="outlined" style={{ marginTop: 20 }}>Add</Button>
+            <Button onClick={onSubmitForm} variant="outlined" style={{ marginTop: 15, marginBottom: 15 }}>Add</Button>
         </Box>
     )
 }
