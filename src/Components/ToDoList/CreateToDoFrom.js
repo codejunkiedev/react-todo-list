@@ -17,6 +17,7 @@ const dispatch = useDispatch()
 
     const onSubmitForm = (e) => {
         e.preventDefault();
+        console.log(form);
         dispatch(addTodo(form));
         // onSubmit(form);
 
@@ -44,7 +45,7 @@ const dispatch = useDispatch()
                     </div>
                 })
             }
-            <Button onSubmit={onSubmitForm} variant="outlined" style={{ marginTop: 20 }}>Add</Button>
+            <Button onClick={onSubmitForm} variant="outlined" style={{ marginTop: 20 }}>Add</Button>
         </Box>
     )
 }
