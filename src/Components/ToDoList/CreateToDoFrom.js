@@ -7,24 +7,26 @@ const CreateToDoFrom = ({ props, onSubmit }) => {
     const [form, setForm] = useState({});
     const [errorTitle, setErrorTitle] = useState(false);
     const [errorText, setErrorText] = useState(false);
-
+    console.log(form);
     const handleForm = (event) => {
         const { id, value } = event.target;
-        console.log(id,value);
-        
         setForm(prevState => ({ ...prevState, [id]: value, IsCompleted: false, IsDeleted: false, CreatedDate:Date.now() }));
     }
 const dispatch = useDispatch()
 
+
+    const clearInput = () => {
+        const clear = { Title: '', Text: '', };
+        setForm(prevState => ({ ...prevState, ...clear }));
+    };
 
 
 
     const onSubmitForm = (e) => {
         console.log(form)
         if (form.Title && form.Title !== '' && form.Text && form.Text !== '') {
-            console.log('form is valid');
             dispatch(addTodo(form));
-            // setForm({});
+            clearInput()
             setErrorTitle(false);
             setErrorText(false);
 
@@ -63,6 +65,7 @@ const dispatch = useDispatch()
                             label={`Type ${item}`}
                             placeholder={item}
                             style={{ width: '100%' }}
+                            value={form[item] || ''}
                             onChange={handleForm}
                         />
                     </div>
